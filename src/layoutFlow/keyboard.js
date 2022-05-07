@@ -10,7 +10,7 @@ export default class Keyboard extends Main {
   }
 
   print(key) {
-    this.textarea.focus();
     this.textarea.value += key;
+    this.textarea.focus();
   }
 }
