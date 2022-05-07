@@ -144,6 +144,7 @@ export default [
     key: 'Delete',
     code: 'NumpadDecimal',
     shift: 'Delete',
+    modeKey: true,
   },
   {
     key: 'CapsLock',
@@ -291,13 +292,19 @@ export default [
     modeKey: true,
   },
   {
+    key: 'Alt',
+    code: 'AltLeft',
+    shift: 'Alt',
+    modeKey: true,
+  },
+  {
     key: ' ',
     code: 'Space',
     shift: '&nbsp',
   },
   {
     key: 'Alt',
-    code: 'AltLeft',
+    code: 'AltRight',
     shift: 'Alt',
     modeKey: true,
   },
