@@ -20,9 +20,45 @@ const keyArr = enCode.map((item) => {
   return key;
 });
 
+
+function shiftKeyMouseClick(keys) {
+  if (keyboard.isShiftKey) {
+    keyboard.isShiftKey = false;
+    keys.forEach((item, index) => {
+      item.setContent(enCode[index].key);
+    });
+  } else {
+    keys.forEach((item, index) => {
+      item.setContent(enCode[index].shift);
+    });
+    keyboard.isShiftKey = true;
+  }
+}
+
 function renderKeys(keys) {
   keys.forEach((item) => {
     item.render();
   });
 }
+
+keyboard.node.addEventListener('click', (e) => {
+  if (e.target.innerText === 'Shift') {
+    shiftKeyMouseClick(keyArr);
+  }
+  if (e.target.innerText === 'Backspace') {
+    const textLength = textArea.node.value.length;
+    if (textArea.node.selectionStart !== textArea.node.selectionEnd) {
+      const beforeSelect = textArea.node.value.substr(0, textArea.node.selectionStart);
+      const afterSelect = textArea.node.value.substr(textArea.node.selectionEnd, textLength);
+      textArea.node.value = beforeSelect + afterSelect;
+    } else {
+      textArea.node.value = textArea.node.value.substr(0, textLength - 1);
+    }
+  }
+  if (e.target.innerText === 'Enter') {
+    textArea.node.value += '\n';
+    textArea.node.focus();
+  }
+});
+
 window.addEventListener('DOMContentLoaded', renderKeys(keyArr));
