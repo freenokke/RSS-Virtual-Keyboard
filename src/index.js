@@ -19,3 +19,10 @@ const keyArr = enCode.map((item) => {
   // parent, class, content, keyboard, isMode, tagName = 'button'
   return key;
 });
+
+function renderKeys(keys) {
+  keys.forEach((item) => {
+    item.render();
+  });
+}
+window.addEventListener('DOMContentLoaded', renderKeys(keyArr));
