@@ -74,6 +74,7 @@ export default [
     key: 'Tab',
     code: 'Tab',
     shift: 'Tab',
+    modeKey: true,
   },
   {
     key: 'q',
@@ -150,6 +151,7 @@ export default [
     key: 'CapsLock',
     code: 'CapsLock',
     shift: 'CapsLock',
+    modeKey: true,
   },
   {
     key: 'a',
