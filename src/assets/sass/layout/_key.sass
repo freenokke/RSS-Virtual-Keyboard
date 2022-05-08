@@ -9,6 +9,13 @@
 .pressed
   box-shadow: none
   opacity: 1
+  background: #f5ba6ed0
+
+.active
+  animation-name: sticking
+  animation-duration: 1.5s
+  animation-iteration-count: infinite
+  box-shadow: 0px 0px 5px 4px rgb(82 255 59)
 
 .Backspace
   width: 128px
@@ -23,10 +30,30 @@
   width: 74px
 
 .CapsLock
+  position: relative
   width: 100px
+  &::after
+    content: ''
+    position: absolute
+    top: 5px
+    left: 5px
+    width: 7px
+    height: 5px
+    background-color: #EBCFCE
+  &.active::after
+    background-color: #1fd31f
 
 .Enter
   width: 125px
 
 .ControlRight, .ControlLeft, .AltLeft, .AltRight
   width: 55px
+
+@keyframes sticking
+  0%
+    transform: scale(1)
+  50%
+    transform: scale(0.95)
+  100%
+    transform: scale(1)
+    
