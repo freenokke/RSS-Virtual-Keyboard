@@ -5,6 +5,11 @@ import Main from './assets/scripts/layoutFlow/template';
 import Keyboard from './assets/scripts/layoutFlow/keyboard';
 import Key from './assets/scripts/layoutFlow/key';
 
+const infoBlock = new Main(document.body, 'div', 'info'); // (parent, tag, class)
+infoBlock.create();
+infoBlock.node.innerHTML = '<p>Клавиатура создана в операционной cистеме Windows</p>'
++ '<p>Кобминация клавиш для переключения языка - Alt + Ctrl</p>';
+
 const textArea = new Main(document.body, 'textarea', 'keyboard-textarea'); // (parent, tag, class)
 textArea.create();
 
