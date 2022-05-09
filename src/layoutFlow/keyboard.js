@@ -1,12 +1,15 @@
 import Main from './template';
 import enCode from '../keyboardData/en';
+import ruCode from '../keyboardData/ru';
 
 export default class Keyboard extends Main {
   isCapsLock = false;
 
+  lang = 'en';
+
   constructor(parent, tag, classes, textarea, startlanguage) {
     super(parent, tag, classes);
-    this.startlanguage = startlanguage;
+    this.lang = startlanguage;
     this.textarea = textarea;
   }
 
@@ -62,12 +65,12 @@ export default class Keyboard extends Main {
     if (this.isCapsLock === false) {
       this.isCapsLock = true;
       keys.forEach((item, index) => {
-        item.setContent(enCode[index].shift);
+        item.setContent(this.lang === 'en' ? enCode[index].shift : ruCode[index].shift);
       });
       button.classList.add('active');
     } else {
       keys.forEach((item, index) => {
-        item.setContent(enCode[index].key);
+        item.setContent(this.lang === 'en' ? enCode[index].key : ruCode[index].key);
       });
       this.isCapsLock = false;
       button.classList.remove('active');
@@ -80,12 +83,12 @@ export default class Keyboard extends Main {
       this.isCapsLock = true;
       button.classList.add('active');
       keys.forEach((item, index) => {
-        item.setContent(enCode[index].shift);
+        item.setContent(this.lang === 'en' ? enCode[index].shift : ruCode[index].shift);
       });
       this.node.onclick = (e) => {
         if (e.target.classList.contains('key')) {
           keys.forEach((item, index) => {
-            item.setContent(enCode[index].key);
+            item.setContent(this.lang === 'en' ? enCode[index].key : ruCode[index].key);
             this.node.onclick = null;
           });
           button.classList.remove('active');
