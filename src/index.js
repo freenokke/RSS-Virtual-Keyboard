@@ -96,6 +96,7 @@ document.addEventListener('keyup', (e) => {
 
 keyboard.node.addEventListener('click', (e) => {
   if (e.target.innerText === 'Shift') {
+    console.log(keyArr)
     keyboard.shift(keyArr, e.target);
   }
   if (e.target.innerText === 'Backspace') {
