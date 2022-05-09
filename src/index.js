@@ -15,6 +15,9 @@ const keyboard = new Keyboard(keyboardWrapper.node, 'div', 'keyboard', textArea.
 keyboard.create();
 
 let keyArr = null;
+
+const keyCodesArr = enCode.map((item) => item.code);
+
 function generateArrDependOnLang(lang) {
   let arr = null;
   if (lang === 'en') {
@@ -39,6 +42,10 @@ function renderKeys(keys) {
 }
 
 document.addEventListener('keydown', (e) => {
+  if (keyCodesArr.includes(e.code)) {
+    const key = keyArr.find((item) => item.node.classList.contains(e.code));
+    key.node.classList.add('pressed');
+  }
   if (e.altKey && e.ctrlKey) {
     if (window.localStorage.getItem('lang') === 'en') {
       window.localStorage.setItem('lang', 'ru');
@@ -64,11 +71,13 @@ document.addEventListener('keydown', (e) => {
   }
 });
 
-function renderKeys(keys) {
-  keys.forEach((item) => {
-    item.render();
-  });
+document.addEventListener('keyup', (e) => {
+  if (keyCodesArr.includes(e.code)) {
+    const key = keyArr.find((item) => item.node.classList.contains(e.code));
+    key.node.classList.remove('pressed');
+  }
 }
+});
 
 keyboard.node.addEventListener('click', (e) => {
   if (e.target.innerText === 'Shift') {
