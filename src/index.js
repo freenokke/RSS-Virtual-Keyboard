@@ -33,7 +33,13 @@ function generateArrDependOnLang(lang) {
   });
 }
 
+function shiftKeyDown(keys) {
+  keys.forEach((item, index) => item.setContent(enCode[index].shift));
+}
 
+function shiftKeyUp(keys) {
+  keys.forEach((item, index) => item.setContent(enCode[index].key));
+}
 
 function renderKeys(keys) {
   keys.forEach((item) => {
@@ -45,6 +51,13 @@ document.addEventListener('keydown', (e) => {
   if (keyCodesArr.includes(e.code)) {
     const key = keyArr.find((item) => item.node.classList.contains(e.code));
     key.node.classList.add('pressed');
+  }
+  if (e.code === 'ShiftLeft' || e.code === 'ShiftRight') {
+    shiftKeyDown(keyArr);
+  }
+  if (e.code === 'Tab') {
+    e.preventDefault();
+    keyboard.tab();
   }
   if (e.altKey && e.ctrlKey) {
     if (window.localStorage.getItem('lang') === 'en') {
@@ -76,7 +89,9 @@ document.addEventListener('keyup', (e) => {
     const key = keyArr.find((item) => item.node.classList.contains(e.code));
     key.node.classList.remove('pressed');
   }
-}
+  if (e.code === 'ShiftLeft' || e.code === 'ShiftRight') {
+    shiftKeyUp(keyArr);
+  }
 });
 
 keyboard.node.addEventListener('click', (e) => {
