@@ -1,9 +1,9 @@
 import './assets/sass/style.sass';
-import enCode from './keyboardData/en';
-import ruCode from './keyboardData/ru';
-import Main from './layoutFlow/template';
-import Keyboard from './layoutFlow/keyboard';
-import Key from './layoutFlow/key';
+import enCode from './assets/scripts/keyboardData/en';
+import ruCode from './assets/scripts/keyboardData/ru';
+import Main from './assets/scripts/layoutFlow/template';
+import Keyboard from './assets/scripts/layoutFlow/keyboard';
+import Key from './assets/scripts/layoutFlow/key';
 
 const textArea = new Main(document.body, 'textarea', 'keyboard-textarea'); // (parent, tag, class)
 textArea.create();
