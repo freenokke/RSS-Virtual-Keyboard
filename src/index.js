@@ -104,3 +104,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   keyboard.lang = language;
 });
+document.addEventListener('keydown', () => {
+  textArea.node.focus();
+});
