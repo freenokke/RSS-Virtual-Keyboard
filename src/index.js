@@ -17,6 +17,7 @@ keyboard.create();
 let keyArr = null;
 
 const keyCodesArr = enCode.map((item) => item.code);
+const modeKey = enCode.filter((item) => item.modeKey).map((item) => item.code);
 
 function generateArrDependOnLang(lang) {
   let arr = null;
@@ -34,11 +35,19 @@ function generateArrDependOnLang(lang) {
 }
 
 function shiftKeyDown(keys) {
-  keys.forEach((item, index) => item.setContent(enCode[index].shift));
+  if (window.localStorage.getItem('lang') === 'en') {
+    keys.forEach((item, index) => item.setContent(enCode[index].shift));
+  } else {
+    keys.forEach((item, index) => item.setContent(ruCode[index].shift));
+  }
 }
 
 function shiftKeyUp(keys) {
-  keys.forEach((item, index) => item.setContent(enCode[index].key));
+  if (window.localStorage.getItem('lang') === 'en') {
+    keys.forEach((item, index) => item.setContent(enCode[index].key));
+  } else {
+    keys.forEach((item, index) => item.setContent(ruCode[index].key));
+  }
 }
 
 function renderKeys(keys) {
@@ -48,6 +57,11 @@ function renderKeys(keys) {
 }
 
 document.addEventListener('keydown', (e) => {
+  if (!modeKey.includes(e.code)) {
+    e.preventDefault();
+    const key = keyArr.find((item) => item.node.classList.contains(e.code));
+    keyboard.print(key.node.innerText);
+  }
   if (keyCodesArr.includes(e.code)) {
     const key = keyArr.find((item) => item.node.classList.contains(e.code));
     key.node.classList.add('pressed');
@@ -58,6 +72,10 @@ document.addEventListener('keydown', (e) => {
   if (e.code === 'Tab') {
     e.preventDefault();
     keyboard.tab();
+  }
+  if (e.code === 'CapsLock') {
+    e.preventDefault();
+    keyboard.capslock(keyArr, keyArr[29].node);
   }
   if (e.altKey && e.ctrlKey) {
     if (window.localStorage.getItem('lang') === 'en') {
@@ -96,7 +114,6 @@ document.addEventListener('keyup', (e) => {
 
 keyboard.node.addEventListener('click', (e) => {
   if (e.target.innerText === 'Shift') {
-    console.log(keyArr)
     keyboard.shift(keyArr, e.target);
   }
   if (e.target.innerText === 'Backspace') {
