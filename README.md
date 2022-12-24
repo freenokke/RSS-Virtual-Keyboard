@@ -1,4 +1,5 @@
-# Deploy: **https://freenokke.github.io/RSS-Virtual-Keyboard**
+# Deploy: 
+* **https://freenokke.github.io/RSS-Virtual-Keyboard**
 
 # Информация о проекте
 Проект основного курса JavaScript/Front-end 2022Q1
